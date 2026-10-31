@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="theme-color" content="#f7f8f5" />
+  <title>QuizLab — Tham gia phòng chơi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" /><link rel="stylesheet" href="live.css" /><link rel="stylesheet" href="player.css" />
+</head>
+<body class="live-page player-page">
+  <header class="live-header"><a class="live-brand" href="/"><span class="brand-mark">Q</span> quiz<span>lab</span><i>PLAYER</i></a><div class="header-right"><span class="server-state"><i id="serverDot"></i><span id="serverLabel">Đang kết nối…</span></span><div class="header-avatar" id="headerAvatar">?</div></div></header>
+  <main class="live-main player-main">
+    <section id="homeScreen" class="live-screen player-home"><div class="player-welcome"><div class="player-emblem">✳</div><p class="eyebrow">QUIZ CỦA CÂU LẠC BỘ</p><h1>Vào phòng,<br/>sẵn sàng <em>đua top.</em></h1><p>Nhập mã phòng host gửi cho bạn, hoặc mở link mời để tham gia quiz trực tiếp.</p></div>
+      <div class="player-join-card"><label for="playerName">TÊN HIỂN THỊ</label><input id="playerName" maxlength="22" placeholder="Ví dụ: Minh Anh" autocomplete="name"/><label for="roomCode">MÃ PHÒNG</label><input id="roomCode" class="room-code-input" maxlength="6" placeholder="ABC123" autocomplete="off"/><button id="joinRoom" class="live-button primary-button">Vào phòng chơi <span>→</span></button><p id="homeMessage" class="form-message"></p><div class="join-card-foot">Chưa có mã? Hãy xin link mời từ host của phòng.</div></div>
+    </section>
+    <section id="roomScreen" class="live-screen hidden"><div class="room-topline"><button class="back-button" id="leaveRoom">← Rời phòng</button><span id="roomStatus" class="room-status">PHÒNG CHỜ</span></div><div class="room-heading"><div><p class="eyebrow" id="roomRole">THÀNH VIÊN THAM GIA</p><h1 id="roomTitle">Phòng chơi</h1><p id="roomSubtitle" class="hero-sub">Chờ host bắt đầu quiz.</p></div><div id="roomCodeBox" class="room-code-box hidden"><span>MÃ PHÒNG</span><strong id="displayRoomCode">------</strong><button id="copyInvite">Sao chép link mời ↗</button></div></div>
+      <div class="room-columns"><section class="game-panel"><div id="waitingPanel"><div class="waiting-art">✳</div><h2>Bạn đã vào phòng!</h2><p>Chờ host bắt đầu quiz. Đồng hồ sẽ chạy cùng lúc trên tất cả thiết bị khi host nhấn bắt đầu.</p><p id="waitingHint" class="waiting-hint">Đang đợi host…</p></div><div id="questionPanel" class="hidden"></div><div id="resultPanel" class="hidden"></div></section><aside class="players-panel"><div class="players-heading"><div><span class="eyebrow">BẢNG XẾP HẠNG LIVE</span><h2 id="playersTitle">Người chơi <b id="playerCount">0</b></h2></div><span class="live-indicator"><i></i> LIVE</span></div><div id="scoreboard" class="scoreboard"></div><div id="playersEmpty" class="players-empty">Bảng xếp hạng sẽ hiện<br/>khi người chơi vào phòng.</div></aside></div><div class="room-footer"><span>✳ &nbsp; Đồng hồ đồng bộ từ máy chủ.</span><span>QuizLab · Câu lạc bộ của bạn</span></div>
+    </section>
+  </main><div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/socket.io/socket.io.js"></script><script src="app.js"></script>
+</body>
+</html>

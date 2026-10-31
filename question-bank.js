@@ -1,0 +1,39 @@
+const questionBank = {
+  speaking: { title: 'Kỹ năng nói trước đám đông', icon: '🎤', questions: [
+    { q: 'Trước buổi thuyết trình, việc nào giúp bạn tự tin nhất?', a: ['Ngủ thật muộn', 'Tập dượt trước nhiều lần', 'Không chuẩn bị gì', 'Chỉ đọc lướt slide'], correct: 1 },
+    { q: 'Khi nói trước đám đông, giọng nói nên như thế nào?', a: ['Nhỏ nhẹ, lí nhí', 'Thật nhanh cho xong', 'To, rõ ràng, tốc độ vừa phải', 'Đều đều, không lên xuống'], correct: 2 },
+    { q: 'Khi thuyết trình, mắt bạn nên nhìn vào đâu?', a: ['Nhìn xuống sàn', 'Nhìn về phía khán giả', 'Chỉ nhìn slide', 'Nhìn điện thoại'], correct: 1 },
+    { q: 'Slide thuyết trình như thế nào là tốt?', a: ['Chép nguyên cả đoạn văn để đọc', 'Ít chữ, có hình minh họa', 'Thật nhiều màu sắc và hiệu ứng', 'Cỡ chữ càng nhỏ càng tốt'], correct: 1 },
+    { q: 'Cảm thấy run trước khi lên sân khấu, bạn nên làm gì?', a: ['Hít thở sâu và chậm vài lần', 'Bỏ về', 'Uống thật nhiều nước ngọt', 'Nhờ người khác lên thay'], correct: 0 },
+    { q: 'Khi nói, đôi tay nên làm gì?', a: ['Đút vào túi quần', 'Khoanh trước ngực', 'Dùng cử chỉ tự nhiên để minh họa ý', 'Nghịch bút liên tục'], correct: 2 },
+    { q: 'Phần mở đầu bài nói nên có gì?', a: ['Vào thẳng nội dung, không chào', 'Chào hỏi, giới thiệu bản thân và chủ đề', 'Xin lỗi vì chuẩn bị chưa kỹ', 'Kể chuyện không liên quan'], correct: 1 },
+    { q: 'Trang phục khi thuyết trình nên như thế nào?', a: ['Gọn gàng, lịch sự, phù hợp sự kiện', 'Càng nổi bật càng tốt', 'Mặc đồ ngủ cho thoải mái', 'Không quan trọng'], correct: 0 },
+    { q: 'Lỡ nói sai một từ khi đang thuyết trình, bạn nên làm gì?', a: ['Dừng lại xin lỗi nhiều lần', 'Bình tĩnh sửa lại rồi nói tiếp', 'Bỏ dở bài nói', 'Cười mãi không dừng'], correct: 1 },
+    { q: 'Cách kết thúc bài nói phù hợp là gì?', a: ['Im lặng rồi đi xuống', 'Tóm tắt ý chính và cảm ơn khán giả', 'Nói “hết rồi”', 'Chiếu thêm slide mới'], correct: 1 }
+  ]},
+  time: { title: 'Quản lý thời gian', icon: '⏰', questions: [
+    { q: 'Theo talkshow, tư duy cốt lõi của quản lý thời gian là gì?', a: ['Làm được nhiều việc nhất', 'Tối giản: chọn đúng việc, ưu tiên đúng việc, làm đến nơi đến chốn', 'Lên lịch kín từng phút', 'Thức khuya để có thêm giờ'], correct: 1 },
+    { q: 'Áp dụng quy tắc 80/20 khi ôn thi là làm gì?', a: ['Đọc lại toàn bộ tài liệu', 'Ôn kỹ phần trọng tâm, luyện dạng bài hay sai', 'Học thuộc slide', 'Chỉ làm đề dễ'], correct: 1 },
+    { q: 'Bốn “lò lửa” trong Thuyết Bốn lò lửa là gì?', a: ['Học tập – Gia đình – Bạn bè – Sức khỏe', 'Công việc – Tiền bạc – Tình yêu – Giải trí', 'Học tập – CLB – Mạng xã hội – Ngủ', 'Gia đình – Sự nghiệp – Tài chính – Du lịch'], correct: 0 },
+    { q: '“Lò lửa” nào không được để tắt lâu?', a: ['Học tập', 'Gia đình', 'Bạn bè', 'Sức khỏe'], correct: 3 },
+    { q: 'Luật Parkinson nói gì?', a: ['Việc có xu hướng chiếm hết thời gian được dành cho nó', 'Làm sớm thì kết quả tốt', 'Hạn càng dài thì làm càng kỹ', 'Buổi sáng làm việc hiệu quả nhất'], correct: 0 },
+    { q: 'Trong ma trận Eisenhower, “Học ngoại ngữ dài hạn” nằm ở ô nào?', a: ['Làm ngay', 'Lên lịch', 'Giảm, nhờ hỗ trợ', 'Hạn chế, loại bỏ'], correct: 1 },
+    { q: 'M.I.T. trong talkshow là gì?', a: ['1–3 việc quan trọng nhất trong ngày', 'Danh sách tất cả việc cần làm', 'Một trường đại học Mỹ', 'Kế hoạch theo tháng'], correct: 0 },
+    { q: 'Một chu kỳ Pomodoro gồm những gì?', a: ['15 phút làm – 5 phút nghỉ', '25 phút tập trung – 5 phút nghỉ', '45 phút làm – 15 phút nghỉ', '60 phút làm – 10 phút nghỉ'], correct: 1 },
+    { q: 'KHÔNG nên áp dụng quy tắc 2 phút vào lúc nào?', a: ['Buổi sáng', 'Trong giờ Pomodoro', 'Khi họp CLB', 'Cuối tuần'], correct: 1 },
+    { q: 'Theo tinh thần “Be Present”, cân bằng nghĩa là gì?', a: ['50% học, 50% chơi', '100% cho việc đang làm', 'Học nhiều hơn chơi', 'Vừa học vừa nghỉ cùng lúc'], correct: 1 }
+  ]},
+  situations: { title: 'Tình huống', icon: '🎭', questions: [
+    { q: 'Vừa lên sân khấu thì micro bị hỏng. Bạn nên làm gì?', a: ['Bỏ xuống sân khấu', 'Bình tĩnh, nói to rõ hơn trong lúc chờ kỹ thuật', 'Đứng im chờ', 'Trách ban tổ chức'], correct: 1 },
+    { q: 'Đang thuyết trình thì khán giả nói chuyện riêng, mất tập trung. Bạn xử lý thế nào?', a: ['Nói to át tiếng họ', 'Nhắc nhở gay gắt', 'Đặt câu hỏi tương tác hoặc bước lại gần khán giả', 'Kệ, nói tiếp'], correct: 2 },
+    { q: 'Còn 2 phút mà bạn mới trình bày được một nửa nội dung. Bạn nên làm gì?', a: ['Nói thật nhanh cho hết', 'Xin thêm 10 phút', 'Chuyển thẳng sang ý quan trọng nhất rồi kết luận', 'Dừng luôn, không kết'], correct: 2 },
+    { q: 'Sắp đến lượt thuyết trình của nhóm thì một thành viên báo vắng. Trưởng nhóm nên làm gì?', a: ['Xin hoãn', 'Bỏ luôn phần của bạn đó', 'Nhanh chóng chia lại phần, người nắm nội dung nhất trình bày thay', 'Đổ lỗi trước lớp'], correct: 2 },
+    { q: 'Bài tập lớn được giao trước 2 tuần, bạn định để tuần cuối mới làm. Theo talkshow, nên làm gì?', a: ['Cứ để tuần cuối', 'Đặt hạn riêng sớm hơn, chia bài thành phần nhỏ và gắn giờ cho từng phần', 'Nhờ bạn làm hộ', 'Xin gia hạn'], correct: 1 },
+    { q: 'Đang trong phiên Pomodoro thì bạn nhắn nhờ một việc mất 1 phút. Bạn làm gì?', a: ['Làm ngay vì dưới 2 phút', 'Ghi lại, hết phiên mới làm', 'Bỏ qua tin nhắn', 'Dừng Pomodoro luôn'], correct: 1 },
+    { q: 'Mùa thi, bạn bỏ bữa sáng và thức khuya liên tục để ôn. Theo talkshow, điều này thế nào?', a: ['Đúng, vì mùa thi ưu tiên học', 'Sai, vì lò sức khỏe không được tắt lâu', 'Không sao nếu điểm cao', 'Chỉ cần uống thêm cà phê'], correct: 1 },
+    { q: 'Ngày mai có 8 việc và bạn không biết bắt đầu từ đâu. Bạn nên làm gì?', a: ['Làm việc dễ nhất trước', 'Chọn 1–3 việc quan trọng nhất (MIT) và làm chúng trước', 'Làm cả 8 việc song song', 'Để mai tính'], correct: 1 },
+    { q: 'Đi chơi với bạn bè nhưng bạn liên tục kiểm tra tin nhắn CLB. Cách làm đúng là gì?', a: ['Trả lời ngay từng tin', 'Cất điện thoại, gom việc trả lời tin nhắn vào khung giờ cố định', 'Rời buổi đi chơi', 'Rời nhóm chat CLB'], correct: 1 },
+    { q: 'Lướt TikTok vô thức trước khi ngủ nằm ở ô nào trong ma trận Eisenhower?', a: ['Làm ngay', 'Lên lịch', 'Giảm, nhờ hỗ trợ', 'Hạn chế, loại bỏ'], correct: 3 }
+  ]}
+};
+if (typeof module !== 'undefined') module.exports = questionBank;

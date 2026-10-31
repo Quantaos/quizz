@@ -1,0 +1,10 @@
+{
+  "name": "quizlab-live",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Phòng chơi quiz câu lạc bộ với bảng xếp hạng thời gian thực",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": { "socket.io": "^4.8.1" }
+}
