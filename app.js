@@ -1,7 +1,7 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const params=new URLSearchParams(location.search), serverAvailable=typeof io==='function';
 const socket=serverAvailable?io():{on(){},emit(event,payload,ack){if(ack)ack({error:'Máy chủ quiz chưa chạy. Hãy cài Node.js rồi mở start-quizlab.bat.'})}};
-let roomCode='',currentQuestion=null,timerHandle=null,toastHandle=null,serverOffset=0;
+let roomCode='',currentQuestion=null,selectedChoice=null,answerResult=null,timerHandle=null,toastHandle=null,serverOffset=0;
 const storedName=localStorage.getItem('quizlabLiveName')||'';
 $('#playerName').value=storedName;$('#headerAvatar').textContent=storedName?storedName[0].toUpperCase():'?';
 if(params.get('room'))$('#roomCode').value=params.get('room').toUpperCase().slice(0,6);
@@ -18,7 +18,26 @@ socket.on('connect',()=>{setServer(true);const sentAt=Date.now();socket.emit('se
 socket.on('disconnect',()=>setServer(false));socket.on('connect_error',()=>setServer(false));socket.on('server:ready',()=>setServer(true));
 socket.on('room:update',data=>{if(roomCode&&data.code!==roomCode)return;if(!roomCode)roomCode=data.code;$('#roomTitle').textContent=data.title;$('#displayRoomCode').textContent=data.code;$('#playerCount').textContent=data.players.length;$('#playersEmpty').classList.toggle('hidden',data.players.length>0);$('#scoreboard').innerHTML=data.players.map(p=>`<div class="score-row ${p.id===socket.id?'is-you':''}"><span class="score-rank">${p.rank<4?['🥇','🥈','🥉'][p.rank-1]:String(p.rank).padStart(2,'0')}</span><span class="score-avatar">${escapeHtml(p.name[0].toUpperCase())}</span><span class="score-name"><strong>${escapeHtml(p.name)}${p.id===socket.id?' <i>BẠN</i>':''}</strong><small>${p.correct} câu đúng${data.state==='playing'?(p.answered?' · Đã trả lời':' · Đang chơi'):''}</small></span><b class="score-total">${p.score.toLocaleString('vi-VN')}<small>điểm</small></b></div>`).join('');if(data.state==='playing'){$('#roomStatus').textContent='ĐANG DIỄN RA';$('#waitingPanel').classList.add('hidden');$('#playersTitle').innerHTML=`Bảng xếp hạng <b>${data.players.length}</b>`}if(data.state==='finished')$('#roomStatus').textContent='ĐÃ KẾT THÚC'});
 socket.on('question:show',q=>{currentQuestion=q;renderQuestion(q)});
-function renderQuestion(q){clearInterval(timerHandle);$('#questionPanel').classList.remove('hidden');$('#waitingPanel').classList.add('hidden');$('#resultPanel').classList.add('hidden');const options=q.answers.map((answer,i)=>`<button class="live-answer" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${escapeHtml(answer)}</button>`).join('');$('#questionPanel').innerHTML=`<div class="question-meta"><span>CÂU ${q.index+1} / ${q.total}</span><span id="timerBadge" class="timer-badge">15 giây</span></div><div class="question-progress"><i style="width:${q.index/q.total*100}%"></i></div><p class="eyebrow">${escapeHtml(q.title)}</p><h2 class="live-question">${escapeHtml(q.text)}</h2><div class="live-answers">${options}</div><div class="question-bottom"><span id="answerFeedback">${q.answered?'Bạn đã trả lời câu này.':'Chọn đáp án của bạn'}</span><b>Điểm nhanh + thưởng tốc độ</b></div>`;if(q.answered)disableChoices();$$('[data-choice]').forEach(button=>button.addEventListener('click',()=>{const chosen=Number(button.dataset.choice);disableChoices();button.classList.add('chosen-answer');socket.emit('answer:submit',{choice:chosen},result=>{if(!result?.ok){$('#answerFeedback').textContent=result?.error||'Không gửi được câu trả lời.';return}$$('[data-choice]').forEach((b,i)=>{if(i===result.correctIndex)b.classList.add('right-answer');if(i===chosen&&!result.correct)b.classList.add('wrong-answer')});$('#answerFeedback').textContent=result.correct?`Chính xác! +${result.points} điểm`:'Chưa chính xác — xem đáp án màu xanh nhé.'})}));updateClock(q)}
+function renderQuestion(q){
+  clearInterval(timerHandle);selectedChoice=null;answerResult=null;
+  $('#questionPanel').classList.remove('hidden');$('#waitingPanel').classList.add('hidden');$('#resultPanel').classList.add('hidden');
+  const options=q.answers.map((answer,i)=>`<button class="live-answer" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${escapeHtml(answer)}</button>`).join('');
+  $('#questionPanel').innerHTML=`<div class="question-meta"><span>CÂU ${q.index+1} / ${q.total}</span><span id="timerBadge" class="timer-badge">10 giây</span></div><div class="question-progress"><i style="width:${q.index/q.total*100}%"></i></div><p class="eyebrow">${escapeHtml(q.title)}</p><h2 class="live-question">${escapeHtml(q.text)}</h2><div class="live-answers">${options}</div><div class="question-bottom"><span id="answerFeedback">${q.answered?'Bạn đã trả lời câu này.':'Chọn đáp án của bạn'}</span><b>Đáp án hiện khi hết giờ</b></div>`;
+  if(q.answered)disableChoices();
+  $$('[data-choice]').forEach(button=>button.addEventListener('click',()=>{
+    const chosen=Number(button.dataset.choice);selectedChoice=chosen;disableChoices();button.classList.add('chosen-answer');
+    socket.emit('answer:submit',{choice:chosen},result=>{if(!result?.ok){$('#answerFeedback').textContent=result?.error||'Không gửi được câu trả lời.';return}answerResult=result;$('#answerFeedback').textContent='Đã ghi nhận. Đáp án sẽ hiện khi hết giờ.'});
+  }));
+  updateClock(q);
+}
+socket.on('question:reveal',data=>{
+  if(!currentQuestion||data.index!==currentQuestion.index)return;
+  $$('[data-choice]').forEach((button,i)=>{if(i===data.correctIndex)button.classList.add('right-answer');if(i===selectedChoice&&i!==data.correctIndex)button.classList.add('wrong-answer')});
+  disableChoices();const feedback=$('#answerFeedback');if(!feedback)return;
+  if(answerResult)feedback.textContent=answerResult.correct?`Chính xác! +${answerResult.points} điểm`:'Chưa chính xác.';
+  else feedback.textContent='Hết giờ! Bạn chưa chọn đáp án.';
+  if(data.explanation)feedback.textContent+=` ${data.explanation}`;
+});
 function updateClock(q){const badge=$('#timerBadge');if(!badge)return;const tick=()=>{const seconds=Math.max(0,Math.ceil((q.endsAt-(Date.now()+serverOffset))/1000));badge.textContent=`${seconds} giây`;if(seconds<=5)badge.classList.add('timer-low');if(seconds<=0)clearInterval(timerHandle)};tick();timerHandle=setInterval(tick,150)}
 function disableChoices(){$$('[data-choice]').forEach(b=>b.disabled=true)}
 socket.on('game:finished',data=>{clearInterval(timerHandle);currentQuestion=null;$('#questionPanel').classList.add('hidden');$('#resultPanel').classList.remove('hidden');const mine=data.rankings.find(p=>p.id===socket.id);$('#resultPanel').innerHTML=`<div class="finish-card"><div class="finish-trophy">🏆</div><p class="eyebrow">${escapeHtml(data.title)}</p><h2>${mine?`Bạn xếp hạng #${mine.rank}!`:'Quiz đã kết thúc!'}</h2><p>Bạn đạt ${mine?mine.score:0} điểm và trả lời đúng ${mine?mine.correct:0} câu. Bảng xếp hạng cuối cùng ở bên cạnh.</p><button class="live-button primary-button" id="backFromResults">Về trang chủ <span>→</span></button></div>`;$('#backFromResults').onclick=()=>{roomCode='';setScreen('home');history.replaceState({},'',location.pathname)}});

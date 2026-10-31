@@ -28,7 +28,7 @@ const cleanName = value => String(value || '').trim().replace(/[<>]/g, '').slice
 const publicQuestion = (room, socketId) => {
   const q = room.questions[room.index];
   if (!q) return null;
-  return { title: room.title, icon: room.icon, index: room.index, total: room.questions.length, text: q.q, answers: q.a, timeLimit: 15, endsAt: room.endsAt, answered: room.answered.has(socketId) };
+  return { title: room.title, icon: room.icon, index: room.index, total: room.questions.length, text: q.q, answers: q.a, timeLimit: 10, endsAt: room.endsAt, answered: room.answered.has(socketId) };
 };
 function rankings(room) {
   return [...room.players.values()].sort((a,b) => b.score-a.score || b.correct-a.correct || a.joinOrder-b.joinOrder)
@@ -39,11 +39,29 @@ function broadcastRoom(room) {
   io.to(room.code).emit('room:update', { code:room.code, title:room.title, state:room.state, hostName:room.hostName, players, index:room.index, total:room.questions.length, answersReceived:room.answered.size });
 }
 function stopTimer(room) { if (room.timer) clearTimeout(room.timer); room.timer = null; }
+function revealAnswer(room) {
+  if (room.state !== 'playing' || room.revealed) return;
+  stopTimer(room);
+  room.revealed = true;
+  const q = room.questions[room.index];
+  for (const [playerId, submission] of room.submissions) {
+    const player = room.players.get(playerId);
+    if (!player) continue;
+    const correct = submission.choice === q.correct;
+    const points = correct ? 100 + Math.max(0, Math.floor((10000 - submission.elapsed) / 1000) * 2) : 0;
+    if (correct) { player.score += points; player.correct++; }
+    io.to(playerId).emit('answer:result', { correct, choice:submission.choice, points });
+  }
+  broadcastRoom(room);
+  io.to(room.code).emit('question:reveal', { index:room.index, correctIndex:q.correct, explanation:q.note || '' });
+}
 function advance(room) {
   if (room.state !== 'playing') return;
   stopTimer(room);
   room.index++;
   room.answered.clear();
+  room.submissions.clear();
+  room.revealed = false;
   if (room.index >= room.questions.length) {
     room.state = 'finished';
     broadcastRoom(room);
@@ -52,9 +70,9 @@ function advance(room) {
   }
   broadcastRoom(room);
   room.questionStartedAt = Date.now();
-  room.endsAt = room.questionStartedAt + 15000;
+  room.endsAt = room.questionStartedAt + 10000;
   for (const socketId of [...room.players.keys(), room.hostId]) io.to(socketId).emit('question:show', publicQuestion(room, socketId));
-  room.timer = setTimeout(() => advance(room), 15000);
+  room.timer = setTimeout(() => revealAnswer(room), 10000);
 }
 io.on('connection', socket => {
   socket.emit('server:ready', { now:Date.now() });
@@ -88,7 +106,7 @@ io.on('connection', socket => {
     const questions = selected.flatMap(set => set.questions.map(q => ({ ...q })));
     let code;
     do { code = Array.from({length:6}, () => alphabet[Math.floor(Math.random()*alphabet.length)]).join(''); } while (rooms.has(code));
-    const room = { code, hostId:socket.id, hostName:name, quizId, title:selected.length===1?selected[0].title:'Tất cả chủ đề', icon:selected.length===1?selected[0].icon:'✳', questions, players:new Map(), state:'waiting', index:-1, answered:new Set(), joinOrder:0, timer:null };
+    const room = { code, hostId:socket.id, hostName:name, quizId, title:selected.length===1?selected[0].title:'Tất cả chủ đề', icon:selected.length===1?selected[0].icon:'✳', questions, players:new Map(), state:'waiting', index:-1, answered:new Set(), submissions:new Map(), revealed:false, joinOrder:0, timer:null };
     rooms.set(code, room);
     socket.join(code); socket.data.roomCode=code; socket.data.role='host';
     ack({ ok:true, code, title:room.title, players:[] });
@@ -115,15 +133,13 @@ io.on('connection', socket => {
     if (room.answered.has(socket.id)) return ack({error:'Bạn đã trả lời câu này rồi.'});
     const q=room.questions[room.index];
     if (!Number.isInteger(choice) || choice<0 || choice>=q.a.length) return ack({error:'Đáp án không hợp lệ.'});
+    if (room.revealed || Date.now() >= room.endsAt) return ack({error:'Đã hết thời gian trả lời câu này.'});
     room.answered.add(socket.id);
-    const correct=choice===q.correct;
-    const elapsed=Date.now()-room.questionStartedAt;
-    const points=correct?100+Math.max(0,Math.floor((15000-elapsed)/1000)*2):0;
-    if(correct){player.score+=points;player.correct++;}
-    ack({ok:true,correct,correctIndex:q.correct,points,explanation:q.note||''});
+    room.submissions.set(socket.id, { choice, elapsed:Date.now()-room.questionStartedAt });
+    ack({ok:true});
     broadcastRoom(room);
   });
-  socket.on('game:next', () => { const room=rooms.get(socket.data.roomCode); if(room && room.hostId===socket.id) advance(room); });
+  socket.on('game:next', () => { const room=rooms.get(socket.data.roomCode); if(room && room.hostId===socket.id && room.revealed) advance(room); });
   socket.on('room:close', (ack = () => {}) => {
     const code=socket.data.roomCode, room=rooms.get(code);
     if(!room || room.hostId!==socket.id) return ack({error:'Chỉ host của phòng mới có thể đóng phòng.'});
