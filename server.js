@@ -28,7 +28,7 @@ const cleanName = value => String(value || '').trim().replace(/[<>]/g, '').slice
 const publicQuestion = (room, socketId) => {
   const q = room.questions[room.index];
   if (!q) return null;
-  return { title: room.title, icon: room.icon, index: room.index, total: room.questions.length, text: q.q, answers: q.a, timeLimit: 25, endsAt: room.endsAt, answered: room.answered.has(socketId) };
+  return { title: room.title, icon: room.icon, index: room.index, total: room.questions.length, text: q.q, answers: q.a, timeLimit: 15, endsAt: room.endsAt, answered: room.answered.has(socketId) };
 };
 function rankings(room) {
   return [...room.players.values()].sort((a,b) => b.score-a.score || b.correct-a.correct || a.joinOrder-b.joinOrder)
@@ -52,9 +52,9 @@ function advance(room) {
   }
   broadcastRoom(room);
   room.questionStartedAt = Date.now();
-  room.endsAt = room.questionStartedAt + 25000;
+  room.endsAt = room.questionStartedAt + 15000;
   for (const socketId of [...room.players.keys(), room.hostId]) io.to(socketId).emit('question:show', publicQuestion(room, socketId));
-  room.timer = setTimeout(() => advance(room), 25000);
+  room.timer = setTimeout(() => advance(room), 15000);
 }
 io.on('connection', socket => {
   socket.emit('server:ready', { now:Date.now() });
@@ -118,7 +118,7 @@ io.on('connection', socket => {
     room.answered.add(socket.id);
     const correct=choice===q.correct;
     const elapsed=Date.now()-room.questionStartedAt;
-    const points=correct?100+Math.max(0,Math.floor((25000-elapsed)/1000)*2):0;
+    const points=correct?100+Math.max(0,Math.floor((15000-elapsed)/1000)*2):0;
     if(correct){player.score+=points;player.correct++;}
     ack({ok:true,correct,correctIndex:q.correct,points,explanation:q.note||''});
     broadcastRoom(room);
