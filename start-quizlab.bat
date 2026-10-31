@@ -3,7 +3,11 @@ setlocal
 cd /d "%~dp0"
 
 where node >nul 2>nul
+if errorlevel 1 if exist "%ProgramFiles%\nodejs\node.exe" set "PATH=%ProgramFiles%\nodejs;%PATH%"
+where node >nul 2>nul
 if errorlevel 1 goto missing_node
+where npm >nul 2>nul
+if errorlevel 1 if exist "%ProgramFiles%\nodejs\npm.cmd" set "PATH=%ProgramFiles%\nodejs;%PATH%"
 where npm >nul 2>nul
 if errorlevel 1 goto missing_node
 
@@ -13,9 +17,17 @@ if not exist "node_modules\socket.io\package.json" (
   if errorlevel 1 goto install_failed
 )
 
+set "PORT=3000"
+:find_port
+netstat -ano | findstr /C:":%PORT% " | findstr /C:"LISTENING" >nul
+if not errorlevel 1 (
+  set /a PORT+=1
+  goto find_port
+)
+
 start "QuizLab Server" /D "%~dp0" cmd /k npm start
 timeout /t 3 /nobreak >nul
-start "" "http://localhost:3000/host.html"
+start "" "http://localhost:%PORT%/host.html"
 exit /b 0
 
 :missing_node
