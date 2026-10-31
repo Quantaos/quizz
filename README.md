@@ -1,6 +1,6 @@
 # QuizLab Live — Quiz thời gian thực cho câu lạc bộ
 
-QuizLab Live dùng bộ 30 câu hỏi từ README gốc: kỹ năng nói trước đám đông, quản lý thời gian và tình huống. `host-login.html` là cổng đăng nhập host; `host.html` là trang tạo phòng, ẩn/hiện mã, quản lý câu hỏi và xem bảng xếp hạng. `index.html` chỉ dành cho người chơi.
+QuizLab Live dùng bộ 30 câu hỏi từ README gốc: kỹ năng nói trước đám đông, quản lý thời gian và tình huống. `host.html` là trang host để tạo phòng, ẩn/hiện mã, quản lý câu hỏi và xem bảng xếp hạng; `index.html` là trang người chơi.
 
 ## Chạy trên máy của bạn
 
@@ -11,7 +11,7 @@ npm install
 npm start
 ```
 
-Mở `http://localhost:3000/host-login.html` để đăng nhập host, nhập tên, chọn bộ câu hỏi rồi tạo phòng. Mật khẩu host được in trong cửa sổ máy chủ khi `start-quizlab.bat` chạy; trên hosting, đặt biến môi trường `HOST_PASSWORD`. Người chơi chỉ cần vào `http://localhost:3000/` và nhập mã hoặc dùng link mời. Trang host và lệnh host được bảo vệ bằng mật khẩu.
+Mở `http://localhost:3000/host.html`, nhập tên, chọn bộ câu hỏi rồi tạo phòng. Người chơi vào `http://localhost:3000/` và nhập mã hoặc dùng link mời. Trang host không có màn hình đăng nhập; ai biết địa chỉ `/host.html` đều có thể quản lý quiz.
 
 ### Chơi cùng Wi-Fi
 

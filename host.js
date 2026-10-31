@@ -3,7 +3,6 @@ const socket=serverAvailable?io():{on(){},emit(event,payload,ack){if(event==='ba
 let bank={},selectedSet='',roomCode='',currentQuestion=null,timerHandle=null,toastHandle=null,serverOffset=0;
 const savedName=localStorage.getItem('quizlabHostName')||'';$('#hostName').value=savedName;$('#headerAvatar').textContent=savedName?savedName[0].toUpperCase():'H';
 if(!serverAvailable){serverStatus(false);$('#createMessage').textContent='Cần khởi chạy máy chủ để tạo phòng. Mở start-quizlab.bat.';$('#createRoom').disabled=true;$('#openManager').disabled=true}
-$('#hostLogout').addEventListener('click',async()=>{try{await fetch('/api/host-logout',{method:'POST'})}finally{location.replace('/')}});
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('visible');clearTimeout(toastHandle);toastHandle=setTimeout(()=>t.classList.remove('visible'),3200)}
 function serverStatus(on){$('#serverDot').classList.toggle('online',on);$('#serverLabel').textContent=on?'Máy chủ đang hoạt động':'Mất kết nối máy chủ'}

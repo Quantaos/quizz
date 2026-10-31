@@ -1,45 +1,16 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 const { Server } = require('socket.io');
 const defaultBank = require('./question-bank');
 const bankPath = path.join(__dirname, 'question-bank.json');
 let bank = fs.existsSync(bankPath) ? JSON.parse(fs.readFileSync(bankPath, 'utf8')) : defaultBank;
-const hostPassword = process.env.HOST_PASSWORD || crypto.randomBytes(9).toString('base64url');
-const hostSessions = new Map();
-if (!process.env.HOST_PASSWORD) console.log(`Host access password (keep private): ${hostPassword}`);
-
-function sessionFromCookie(cookieHeader = '') {
-  const token = cookieHeader.split(';').map(v=>v.trim()).find(v=>v.startsWith('quizlab_host='))?.slice('quizlab_host='.length);
-  const expiry = token && hostSessions.get(token);
-  if (!expiry || expiry < Date.now()) { if(token)hostSessions.delete(token); return null; }
-  return token;
-}
-function isHostRequest(req) { return Boolean(sessionFromCookie(req.headers.cookie)); }
-function isHostSocket(socket) { return Boolean(sessionFromCookie(socket.request.headers.cookie)); }
 
 const port = Number(process.env.PORT || 3000);
 const root = __dirname;
 const server = http.createServer((req, res) => {
   const pathname = decodeURIComponent(new URL(req.url, `http://${req.headers.host || 'localhost'}`).pathname);
   if (pathname === '/health') { res.writeHead(200, { 'Content-Type': 'application/json' }); return res.end('{"ok":true}'); }
-  if (pathname === '/api/host-login' && req.method === 'POST') {
-    let body=''; req.on('data',chunk=>{body+=chunk;if(body.length>4096)req.destroy()});
-    req.on('end',()=>{
-      let password=''; try { password=String(JSON.parse(body).password||''); } catch {}
-      const sent=Buffer.from(password), expected=Buffer.from(hostPassword);
-      if(sent.length!==expected.length || !crypto.timingSafeEqual(sent,expected)) { res.writeHead(401,{'Content-Type':'application/json'});return res.end('{"error":"Mật khẩu host chưa đúng."}'); }
-      const token=crypto.randomBytes(32).toString('hex');hostSessions.set(token,Date.now()+12*60*60*1000);
-      const secure=(req.headers['x-forwarded-proto']==='https');
-      res.writeHead(200,{'Content-Type':'application/json','Set-Cookie':`quizlab_host=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=43200${secure?'; Secure':''}`});res.end('{"ok":true}');
-    }); return;
-  }
-  if (pathname === '/api/host-logout' && req.method === 'POST') {
-    const token=sessionFromCookie(req.headers.cookie);if(token)hostSessions.delete(token);
-    res.writeHead(200,{'Content-Type':'application/json','Set-Cookie':'quizlab_host=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0'});return res.end('{"ok":true}');
-  }
-  if ((pathname === '/host.html' || pathname === '/host.js') && !isHostRequest(req)) { res.writeHead(302,{Location:'/host-login.html'});return res.end(); }
   if (['/server.js', '/question-bank.js', '/question-bank.json'].includes(pathname)) { res.writeHead(404); return res.end('Not found'); }
   const requestPath = pathname === '/' ? '/index.html' : pathname;
   const file = path.resolve(root, `.${requestPath}`);
@@ -86,13 +57,11 @@ function advance(room) {
   room.timer = setTimeout(() => advance(room), 25000);
 }
 io.on('connection', socket => {
-  socket.data.hostAuthenticated=isHostSocket(socket);
   socket.emit('server:ready', { now:Date.now() });
   socket.on('server:time', ({ sentAt } = {}, ack = () => {}) => ack({ now:Date.now(), sentAt }));
-  socket.on('bank:get', (ack = () => {}) => { if(!socket.data.hostAuthenticated)return ack({error:'Cần đăng nhập bằng mật khẩu host.'});ack({ bank }); });
+  socket.on('bank:get', (ack = () => {}) => ack({ bank }));
   socket.on('bank:update', (incoming, ack = () => {}) => {
     try {
-      if(!socket.data.hostAuthenticated) throw new Error('Cần đăng nhập bằng mật khẩu host.');
       if (!incoming || typeof incoming !== 'object' || Object.keys(incoming).length < 1 || Object.keys(incoming).length > 12) throw new Error('Bộ câu hỏi không hợp lệ.');
       const updated = {};
       for (const [id, set] of Object.entries(incoming)) {
@@ -113,7 +82,6 @@ io.on('connection', socket => {
     } catch (error) { ack({ error:error.message || 'Không thể lưu bộ câu hỏi.' }); }
   });
   socket.on('room:create', ({ name, quizId } = {}, ack = () => {}) => {
-    if(!socket.data.hostAuthenticated)return ack({error:'Cần đăng nhập bằng mật khẩu host.'});
     name = cleanName(name);
     if (!name) return ack({ error:'Nhập tên của bạn trước khi tạo phòng.' });
     const selected = quizId === 'all' ? Object.values(bank) : [bank[bank[quizId] ? quizId : Object.keys(bank)[0]]];
@@ -138,7 +106,7 @@ io.on('connection', socket => {
   });
   socket.on('game:start', () => {
     const room=rooms.get(socket.data.roomCode);
-    if (!socket.data.hostAuthenticated || !room || room.hostId!==socket.id || room.state!=='waiting') return;
+    if (!room || room.hostId!==socket.id || room.state!=='waiting') return;
     room.state='playing'; room.index=-1; advance(room);
   });
   socket.on('answer:submit', ({ choice } = {}, ack = () => {}) => {
@@ -155,10 +123,10 @@ io.on('connection', socket => {
     ack({ok:true,correct,correctIndex:q.correct,points,explanation:q.note||''});
     broadcastRoom(room);
   });
-  socket.on('game:next', () => { const room=rooms.get(socket.data.roomCode); if(socket.data.hostAuthenticated && room && room.hostId===socket.id) advance(room); });
+  socket.on('game:next', () => { const room=rooms.get(socket.data.roomCode); if(room && room.hostId===socket.id) advance(room); });
   socket.on('room:close', (ack = () => {}) => {
     const code=socket.data.roomCode, room=rooms.get(code);
-    if(!socket.data.hostAuthenticated || !room || room.hostId!==socket.id) return ack({error:'Chỉ host đã đăng nhập mới có thể đóng phòng.'});
+    if(!room || room.hostId!==socket.id) return ack({error:'Chỉ host của phòng mới có thể đóng phòng.'});
     stopTimer(room); io.to(code).emit('room:closed'); rooms.delete(code); socket.data.roomCode=null; ack({ok:true});
   });
   socket.on('disconnect', () => {

@@ -15,7 +15,7 @@ if not exist "node_modules\socket.io\package.json" (
 
 start "QuizLab Server" /D "%~dp0" cmd /k npm start
 timeout /t 3 /nobreak >nul
-start "" "http://localhost:3000/host-login.html"
+start "" "http://localhost:3000/host.html"
 exit /b 0
 
 :missing_node
