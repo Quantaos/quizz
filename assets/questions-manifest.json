@@ -118,10 +118,10 @@
   },
   {
     "question": 14,
-    "query": "Vietnam music concert",
-    "file": "/assets/questions/14-vietnam-music-concert.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_dalbera_-_Huong_Thanh_Trio,_(mus%C3%A9e_Guimet,_Paris)_(3).jpg",
-    "title": "File:Flickr - dalbera - Huong Thanh Trio, (musée Guimet, Paris) (3).jpg",
+    "query": "Vietnam music performance",
+    "file": "/assets/questions/14-bieu-dien-am-nhac-viet-nam.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ca_tr%C3%B9_performance.jpg",
+    "title": "File:Ca tr? performance.jpg",
     "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/72746018@N00\">Jean-Pierre Dalbéra</a> from Paris, France",
     "license": "CC BY 2.0"
   },

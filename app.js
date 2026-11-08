@@ -21,12 +21,16 @@ socket.on('question:show',q=>{currentQuestion=q;renderQuestion(q)});
 function renderQuestion(q){
   clearInterval(timerHandle);selectedChoice=null;answerResult=null;
   $('#questionPanel').classList.remove('hidden');$('#waitingPanel').classList.add('hidden');$('#resultPanel').classList.add('hidden');
-  const options=q.answers.map((answer,i)=>`<button class="live-answer" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${escapeHtml(answer)}</button>`).join('');
+  const options=q.answers.map((answer,i)=>`<button class="live-answer" data-choice="${i}" aria-pressed="false"><span>${String.fromCharCode(65+i)}</span>${escapeHtml(answer)}</button>`).join('');
   const image=q.image?`<img class="question-image" src="${escapeHtml(q.image)}" alt="${escapeHtml(q.imageAlt||q.text)}" loading="eager" onerror="this.hidden=true">`:'';
   $('#questionPanel').innerHTML=`<div class="question-meta"><span>CÂU ${q.index+1} / ${q.total}</span><span id="timerBadge" class="timer-badge">10 giây</span></div><div class="question-progress"><i style="width:${q.index/q.total*100}%"></i></div><p class="eyebrow">${escapeHtml(q.title)}</p><h2 class="live-question">${escapeHtml(q.text)}</h2>${image}<div class="live-answers">${options}</div><div class="question-bottom"><span id="answerFeedback">${q.answered?'Bạn đã trả lời câu này.':'Chọn đáp án của bạn'}</span><b>Đáp án hiện khi hết giờ</b></div>`;
   $$('[data-choice]').forEach(button=>button.addEventListener('click',()=>{
     const chosen=Number(button.dataset.choice);selectedChoice=chosen;
-    $$('[data-choice]').forEach(option=>option.classList.toggle('chosen-answer',Number(option.dataset.choice)===chosen));
+    $$('[data-choice]').forEach(option=>{
+      const isChosen=Number(option.dataset.choice)===chosen;
+      option.classList.toggle('chosen-answer',isChosen);
+      option.setAttribute('aria-pressed',String(isChosen));
+    });
     socket.emit('answer:submit',{choice:chosen},result=>{if(!result?.ok){$('#answerFeedback').textContent=result?.error||'Không gửi được câu trả lời.';return}answerResult=result;$('#answerFeedback').textContent='Đã ghi nhận. Đáp án sẽ hiện khi hết giờ.'});
   }));
   updateClock(q);
