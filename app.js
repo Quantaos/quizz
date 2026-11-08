@@ -24,13 +24,17 @@ function renderQuestion(q){
   const options=q.answers.map((answer,i)=>`<button class="live-answer" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${escapeHtml(answer)}</button>`).join('');
   const image=q.image?`<img class="question-image" src="${escapeHtml(q.image)}" alt="${escapeHtml(q.imageAlt||q.text)}" loading="eager" onerror="this.hidden=true">`:'';
   $('#questionPanel').innerHTML=`<div class="question-meta"><span>CÂU ${q.index+1} / ${q.total}</span><span id="timerBadge" class="timer-badge">10 giây</span></div><div class="question-progress"><i style="width:${q.index/q.total*100}%"></i></div><p class="eyebrow">${escapeHtml(q.title)}</p><h2 class="live-question">${escapeHtml(q.text)}</h2>${image}<div class="live-answers">${options}</div><div class="question-bottom"><span id="answerFeedback">${q.answered?'Bạn đã trả lời câu này.':'Chọn đáp án của bạn'}</span><b>Đáp án hiện khi hết giờ</b></div>`;
-  if(q.answered)disableChoices();
   $$('[data-choice]').forEach(button=>button.addEventListener('click',()=>{
-    const chosen=Number(button.dataset.choice);selectedChoice=chosen;disableChoices();button.classList.add('chosen-answer');
+    const chosen=Number(button.dataset.choice);selectedChoice=chosen;
+    $$('[data-choice]').forEach(option=>option.classList.toggle('chosen-answer',Number(option.dataset.choice)===chosen));
     socket.emit('answer:submit',{choice:chosen},result=>{if(!result?.ok){$('#answerFeedback').textContent=result?.error||'Không gửi được câu trả lời.';return}answerResult=result;$('#answerFeedback').textContent='Đã ghi nhận. Đáp án sẽ hiện khi hết giờ.'});
   }));
   updateClock(q);
 }
+socket.on('answer:result',result=>{
+  if(!currentQuestion)return;
+  answerResult=result;
+});
 socket.on('question:reveal',data=>{
   if(!currentQuestion||data.index!==currentQuestion.index)return;
   if(selectedChoice!==null)$$('[data-choice]').forEach((button,i)=>{if(i===data.correctIndex)button.classList.add('right-answer');if(i===selectedChoice&&i!==data.correctIndex)button.classList.add('wrong-answer')});

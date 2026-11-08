@@ -130,8 +130,7 @@ io.on('connection', socket => {
   socket.on('answer:submit', ({ choice } = {}, ack = () => {}) => {
     const room=rooms.get(socket.data.roomCode), player=room?.players.get(socket.id);
     if (!room || !player || room.state!=='playing') return ack({error:'Lượt chơi hiện không nhận câu trả lời.'});
-    if (room.answered.has(socket.id)) return ack({error:'Bạn đã trả lời câu này rồi.'});
-    const q=room.questions[room.index];
+    const q = room.questions[room.index];
     if (!Number.isInteger(choice) || choice<0 || choice>=q.a.length) return ack({error:'Đáp án không hợp lệ.'});
     if (room.revealed || Date.now() >= room.endsAt) return ack({error:'Đã hết thời gian trả lời câu này.'});
     room.answered.add(socket.id);
