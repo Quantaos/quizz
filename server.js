@@ -28,7 +28,7 @@ const cleanName = value => String(value || '').trim().replace(/[<>]/g, '').slice
 const publicQuestion = (room, socketId) => {
   const q = room.questions[room.index];
   if (!q) return null;
-  return { title: room.title, icon: room.icon, index: room.index, total: room.questions.length, text: q.q, answers: q.a, timeLimit: 10, endsAt: room.endsAt, answered: room.answered.has(socketId) };
+  return { title: room.title, icon: room.icon, index: room.index, total: room.questions.length, text: q.q, answers: q.a, image: q.image || '', imageAlt: q.imageAlt || q.q, timeLimit: 10, endsAt: room.endsAt, answered: room.answered.has(socketId) };
 };
 function rankings(room) {
   return [...room.players.values()].sort((a,b) => b.score-a.score || b.correct-a.correct || a.joinOrder-b.joinOrder)
@@ -86,7 +86,7 @@ io.on('connection', socket => {
         if (!/^[a-z0-9_-]{1,30}$/.test(id) || !set || typeof set.title !== 'string' || !Array.isArray(set.questions) || set.questions.length < 1 || set.questions.length > 100) throw new Error('Mỗi bộ câu hỏi cần có ít nhất một câu.');
         const questions = set.questions.map(q => {
           if (!q || typeof q.q !== 'string' || !q.q.trim() || q.q.length > 500 || !Array.isArray(q.a) || q.a.length !== 4 || q.a.some(a => typeof a !== 'string' || !a.trim() || a.length > 300) || !Number.isInteger(q.correct) || q.correct < 0 || q.correct > 3) throw new Error('Mỗi câu cần nội dung, đủ 4 đáp án và đáp án đúng.');
-          return { q:q.q.trim(), a:q.a.map(a=>a.trim()), correct:q.correct };
+          return { q:q.q.trim(), a:q.a.map(a=>a.trim()), correct:q.correct, image:typeof q.image === 'string' ? q.image.trim().slice(0,500) : '', imageAlt:typeof q.imageAlt === 'string' ? q.imageAlt.trim().slice(0,200) : '' };
         });
         updated[id] = { title:set.title.trim().slice(0,80), icon:String(set.icon||'✦').slice(0,8), questions };
       }
