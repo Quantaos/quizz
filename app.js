@@ -33,9 +33,10 @@ function renderQuestion(q){
 }
 socket.on('question:reveal',data=>{
   if(!currentQuestion||data.index!==currentQuestion.index)return;
-  $$('[data-choice]').forEach((button,i)=>{if(i===data.correctIndex)button.classList.add('right-answer');if(i===selectedChoice&&i!==data.correctIndex)button.classList.add('wrong-answer')});
+  if(selectedChoice!==null)$$('[data-choice]').forEach((button,i)=>{if(i===data.correctIndex)button.classList.add('right-answer');if(i===selectedChoice&&i!==data.correctIndex)button.classList.add('wrong-answer')});
   disableChoices();const feedback=$('#answerFeedback');if(!feedback)return;
   if(answerResult)feedback.textContent=answerResult.correct?`Chính xác! +${answerResult.points} điểm`:'Chưa chính xác.';
+  else if(selectedChoice!==null)feedback.textContent=selectedChoice===data.correctIndex?'Chính xác!':'Chưa chính xác.';
   else feedback.textContent='Hết giờ! Bạn chưa chọn đáp án.';
   if(data.explanation)feedback.textContent+=` ${data.explanation}`;
 });
