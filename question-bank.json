@@ -330,7 +330,7 @@
           "Hình chữ nhật dài"
         ],
         "correct": 1,
-        "image": "/assets/questions/01-banh-chung-vietnam.jpg",
+        "image": "/assets/questions/01-banh-chung-truyen-thong.jpg",
         "imageAlt": "Bánh chưng truyền thống"
       },
       {
@@ -342,7 +342,7 @@
           "Chiến thắng Rạch Gầm – Xoài Mút"
         ],
         "correct": 1,
-        "image": "/assets/questions/02-dien-bien-phu.png",
+        "image": "/assets/questions/02-dien-bien-phu-1954.jpg",
         "imageAlt": "Điện Biên Phủ"
       },
       {
@@ -402,7 +402,7 @@
           "Hồ Xuân Hương"
         ],
         "correct": 1,
-        "image": "/assets/questions/07-nguyen-du.jpg",
+        "image": "/assets/questions/07-nguyen-du-tuong-dai.jpg",
         "imageAlt": "Nguyễn Du"
       },
       {
@@ -594,7 +594,7 @@
           "Quang Trung"
         ],
         "correct": 1,
-        "image": "/assets/questions/23-hung-kings-festival.jpg",
+        "image": "/assets/questions/23-den-hung-le-hoi.jpg",
         "imageAlt": "Lễ hội Đền Hùng"
       },
       {
@@ -606,7 +606,7 @@
           "Bột năng"
         ],
         "correct": 1,
-        "image": "/assets/questions/24-banh-xeo-vietnam.jpg",
+        "image": "/assets/questions/24-banh-xeo-viet-nam.jpg",
         "imageAlt": "Bánh xèo"
       },
       {
@@ -618,7 +618,7 @@
           "Cận cực"
         ],
         "correct": 2,
-        "image": "/assets/questions/25-vietnam-tropical-landscape.jpg",
+        "image": "/assets/questions/25-ruong-bac-thang-viet-nam.jpg",
         "imageAlt": "Cảnh quan nhiệt đới Việt Nam"
       },
       {

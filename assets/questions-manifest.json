@@ -1,19 +1,19 @@
 [
   {
     "question": 1,
-    "query": "Banh Chung Vietnam",
-    "file": "/assets/questions/01-banh-chung-vietnam.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Banh_da_nem_lang_cheu.jpg",
-    "title": "File:Banh da nem lang cheu.jpg",
-    "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Banhdanem&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Banhdanem (page does not exist)\">Banhdanem</a>",
-    "license": "CC BY-SA 4.0"
+    "query": "File:Banh Chung in Vietnam.jpg",
+    "file": "/assets/questions/01-banh-chung-truyen-thong.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Banh_Chung_in_Vietnam.jpg",
+    "title": "File:Banh Chung in Vietnam.jpg",
+    "artist": "",
+    "license": "Public domain"
   },
   {
     "question": 2,
-    "query": "Dien Bien Phu",
-    "file": "/assets/questions/02-dien-bien-phu.png",
-    "source": "https://commons.wikimedia.org/wiki/File:Location_of_Dien_Bien_Phu_within_Vietnam.png",
-    "title": "File:Location of Dien Bien Phu within Vietnam.png",
+    "query": "File:Victory in Battle of Dien Bien Phu.jpg",
+    "file": "/assets/questions/02-dien-bien-phu-1954.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Victory_in_Battle_of_Dien_Bien_Phu.jpg",
+    "title": "File:Victory in Battle of Dien Bien Phu.jpg",
     "artist": "",
     "license": "CC BY-SA 3.0"
   },
@@ -55,11 +55,11 @@
   },
   {
     "question": 7,
-    "query": "Nguyen Du",
-    "file": "/assets/questions/07-nguyen-du.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Nguyen_A%C3%AFn_Nu%C3%A4%27C_(Ho-Chi-Minh),_d%C3%A9l%C3%A9gu%C3%A9_indochinois,_Congr%C3%A8s_communiste_de_Marseille,_1921,_Meurisse,_BNF_Gallica.jpg",
-    "title": "File:Nguyen Aïn Nuä'C (Ho-Chi-Minh), délégué indochinois, Congrès communiste de Marseille, 1921, Meurisse, BNF Gallica.jpg",
-    "artist": "<bdi><a href=\"https://www.wikidata.org/wiki/Q13230870\" class=\"extiw\" title=\"d:Q13230870\"><span title=\"French news agency\">Agence de presse Meurisse</span></a></bdi>",
+    "query": "File:T??ng ??i c? Nguy?n Du.jpg",
+    "file": "/assets/questions/07-nguyen-du-tuong-dai.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:T%C6%B0%E1%BB%A3ng_%C4%91%C3%A0i_c%E1%BB%A5_Nguy%E1%BB%85n_Du.jpg",
+    "title": "File:T??ng ??i c? Nguy?n Du.jpg",
+    "artist": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Philip_de_L%C3%A1szl%C3%B3\" class=\"extiw\" title=\"w:en:Philip de László\"><span title=\"Anglo-Hungarian artist (1869-1937)\">Philip de László</span></a></bdi>",
     "license": "Public domain"
   },
   {
@@ -199,29 +199,29 @@
   },
   {
     "question": 23,
-    "query": "Hung Kings Festival",
-    "file": "/assets/questions/23-hung-kings-festival.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:The_Early_Kings_of_Norway.djvu",
-    "title": "File:The Early Kings of Norway.djvu",
-    "artist": "Thomas Carlyle",
+    "query": "L? t?i ??n th? Vua H?ng",
+    "file": "/assets/questions/23-den-hung-le-hoi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:D%C3%A2ng_l%E1%BB%85_t%E1%BA%A1i_%C4%90%E1%BB%81n_th%E1%BB%9D_Vua_H%C3%B9ng_%E1%BB%9F_S%E1%BB%9F_th%C3%BA,_ng%C3%A0y_21_th%C3%A1ng_4_n%C4%83m_2021_(nh%E1%BA%B1m_ng%C3%A0y_10_th%C3%A1ng_3_%C3%82m_l%E1%BB%8Bch)_(1).jpg",
+    "title": "L? t?i ??n th? Vua H?ng",
+    "artist": "<div class=\"fn value\">\nU.S. Naval Hospital Roosevelt Roads</div>",
     "license": "Public domain"
   },
   {
     "question": 24,
-    "query": "Banh xeo Vietnam",
-    "file": "/assets/questions/24-banh-xeo-vietnam.jpg",
+    "query": "File:B?nh x?o 1.jpg",
+    "file": "/assets/questions/24-banh-xeo-viet-nam.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_x%C3%A8o_1.jpg",
-    "title": "File:Bánh xèo 1.jpg",
+    "title": "File:B?nh x?o 1.jpg",
     "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/27454212@N00\">Kent Wang</a> from Austin, TX",
     "license": "CC BY-SA 2.0"
   },
   {
     "question": 25,
-    "query": "Vietnam tropical landscape",
-    "file": "/assets/questions/25-vietnam-tropical-landscape.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Cultivation_of_neglected_tropical_fruits_with_promise_-_Part_1._The_mangosteen_(IA_cultivationofneg155unit).pdf",
-    "title": "File:Cultivation of neglected tropical fruits with promise - Part 1. The mangosteen (IA cultivationofneg155unit).pdf",
-    "artist": "<div class=\"fn value\">\n<dl><dd>United States. Agricultural Research Service</dd>\n<dd>United States. Science and Education Administration</dd></dl></div>",
+    "query": "File:Rice terraces in Vietnam.jpg",
+    "file": "/assets/questions/25-ruong-bac-thang-viet-nam.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Vietnam.jpg",
+    "title": "File:Rice terraces in Vietnam.jpg",
+    "artist": "<div class=\"fn value\">\nWalker, Glenn Ronald.</div>",
     "license": "Public domain"
   },
   {
