@@ -127,10 +127,10 @@
   },
   {
     "question": 15,
-    "query": "North Vietnam winter",
-    "file": "/assets/questions/15-north-vietnam-winter.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:U.S._Marines_in_Vietnam_-_the_defining_year,_1968_(IA_usmarinesinvietn00jack).pdf",
-    "title": "File:U.S. Marines in Vietnam - the defining year, 1968 (IA usmarinesinvietn00jack).pdf",
+    "query": "File:Javatuan hanoi winter window.jpg",
+    "file": "/assets/questions/15-mien-bac-mua-dong-ha-noi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Javatuan_hanoi_winter_window.jpg",
+    "title": "File:Javatuan hanoi winter window.jpg",
     "artist": "<div class=\"fn value\">\n<dl><dd>Shulimson, Jack</dd>\n<dd>United States. Marine Corps. History and Museums Division</dd></dl></div>",
     "license": "Public domain"
   },
@@ -181,10 +181,10 @@
   },
   {
     "question": 21,
-    "query": "Mekong Delta rainy season",
-    "file": "/assets/questions/21-mekong-delta-rainy-season.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Area_Handbook_for_Cambodia.pdf",
-    "title": "File:Area Handbook for Cambodia.pdf",
+    "query": "File:VietnamPluie.jpg",
+    "file": "/assets/questions/21-nam-bo-mua-mua.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:VietnamPluie.jpg",
+    "title": "File:VietnamPluie.jpg",
     "artist": "Munson, Frederick P.; Martindale, Kenneth W.; McMorris, David S.; Parachini, Kathryn E.; Raiford, William N.; Townsend, Charles",
     "license": "Public domain"
   },
@@ -244,8 +244,8 @@
   },
   {
     "question": 28,
-    "query": "Sapa rice terraces",
-    "file": "/assets/questions/28-sapa-rice-terraces.jpg",
+    "query": "File:Sapa, terraced rice paddy.jpg",
+    "file": "/assets/questions/28-ruong-bac-thang-sa-pa.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Sapa,_terraced_rice_paddy.jpg",
     "title": "File:Sapa, terraced rice paddy.jpg",
     "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/8944742@N03\">AJ Oswald</a>",
