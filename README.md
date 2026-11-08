@@ -34,6 +34,8 @@ Phòng hiện được giữ trong bộ nhớ của tiến trình server. Ngư�
 
 Sửa câu hỏi trong trang `/host.html` hoặc trực tiếp trong `question-bank.js`. Khi lưu qua trình quản lý, máy chủ ghi bộ câu hỏi mới vào `question-bank.json`, nên nội dung vẫn còn sau khi khởi động lại. Mỗi câu có nội dung `q`, bốn lựa chọn `a` và chỉ số đáp án đúng `correct` (bắt đầu từ 0). Câu hỏi có hình minh họa có thêm `image` và `imageAlt`; ảnh được gửi cùng câu hỏi nhưng đáp án vẫn chỉ được chấm ở phía server. Mỗi câu có 10 giây.
 
+Ảnh câu hỏi được đóng gói local trong [assets/questions](./assets/questions), nên khi chạy trên GitHub/Render không phụ thuộc máy chủ ảnh bên ngoài. Nguồn và giấy phép của từng ảnh được lưu trong [assets/questions-manifest.json](./assets/questions-manifest.json); các ảnh được lấy từ Wikimedia Commons.
+
 ## Bộ câu hỏi nguồn
 
 Bốn bộ câu hỏi nằm trong `question-bank.js`:

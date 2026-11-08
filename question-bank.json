@@ -330,7 +330,7 @@
           "Hình chữ nhật dài"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=B%C3%A1nh%20ch%C6%B0ng%20truy%E1%BB%81n%20th%E1%BB%91ng",
+        "image": "/assets/questions/01-banh-chung-vietnam.jpg",
         "imageAlt": "Bánh chưng truyền thống"
       },
       {
@@ -342,7 +342,7 @@
           "Chiến thắng Rạch Gầm – Xoài Mút"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=%C4%90i%E1%BB%87n%20Bi%C3%AAn%20Ph%E1%BB%A7",
+        "image": "/assets/questions/02-dien-bien-phu.png",
         "imageAlt": "Điện Biên Phủ"
       },
       {
@@ -354,7 +354,7 @@
           "36"
         ],
         "correct": 2,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=B%E1%BA%A3n%20%C4%91%E1%BB%93%20Vi%E1%BB%87t%20Nam",
+        "image": "/assets/questions/03-vietnam-map.png",
         "imageAlt": "Bản đồ Việt Nam"
       },
       {
@@ -366,7 +366,7 @@
           "Cà Mau"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=M%C3%B3n%20cao%20l%E1%BA%A7u%20H%E1%BB%99i%20An",
+        "image": "/assets/questions/04-cao-lau-hoi-an.jpg",
         "imageAlt": "Món cao lầu Hội An"
       },
       {
@@ -378,7 +378,7 @@
           "Hát quan họ"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=R%C6%B0%E1%BB%9Bc%20%C4%91%C3%A8n%20Trung%20thu",
+        "image": "/assets/questions/05-mid-autumn-festival-vietnam-lantern.jpg",
         "imageAlt": "Rước đèn Trung thu"
       },
       {
@@ -390,7 +390,7 @@
           "Dãy Tam Đảo"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=%C4%90%E1%BB%89nh%20Fansipan",
+        "image": "/assets/questions/06-fansipan.jpg",
         "imageAlt": "Đỉnh Fansipan"
       },
       {
@@ -402,7 +402,7 @@
           "Hồ Xuân Hương"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Nguy%E1%BB%85n%20Du",
+        "image": "/assets/questions/07-nguyen-du.jpg",
         "imageAlt": "Nguyễn Du"
       },
       {
@@ -414,7 +414,7 @@
           "Cần Thơ"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=B%C3%BAn%20b%C3%B2%20Hu%E1%BA%BF",
+        "image": "/assets/questions/08-bun-bo-hue.jpg",
         "imageAlt": "Bún bò Huế"
       },
       {
@@ -426,7 +426,7 @@
           "7/5/1954"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Qu%E1%BA%A3ng%20tr%C6%B0%E1%BB%9Dng%20Ba%20%C4%90%C3%ACnh",
+        "image": "/assets/questions/09-ba-dinh-square-vietnam.jpg",
         "imageAlt": "Quảng trường Ba Đình"
       },
       {
@@ -438,7 +438,7 @@
           "Chợ cửa khẩu"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Ch%E1%BB%A3%20n%E1%BB%95i%20mi%E1%BB%81n%20T%C3%A2y",
+        "image": "/assets/questions/10-floating-market-mekong.jpg",
         "imageAlt": "Chợ nổi miền Tây"
       },
       {
@@ -450,7 +450,7 @@
           "Thành phố di sản"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=%C4%90%C3%A0%20L%E1%BA%A1t%20v%C3%A0%20hoa",
+        "image": "/assets/questions/11-da-lat-flowers.jpg",
         "imageAlt": "Đà Lạt và hoa"
       },
       {
@@ -462,7 +462,7 @@
           "Chúc mừng người lớn tuổi"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=L%C3%AC%20x%C3%AC%20%C4%91%E1%BA%A7u%20n%C4%83m",
+        "image": "/assets/questions/12-vietnamese-lucky-money.jpg",
         "imageAlt": "Lì xì đầu năm"
       },
       {
@@ -474,7 +474,7 @@
           "Ninh Bình"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Hang%20S%C6%A1n%20%C4%90o%C3%B2ng",
+        "image": "/assets/questions/13-son-doong-cave.jpg",
         "imageAlt": "Hang Sơn Đoòng"
       },
       {
@@ -486,7 +486,7 @@
           "Hội họa"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=%C3%82m%20nh%E1%BA%A1c%20Vi%E1%BB%87t%20Nam",
+        "image": "/assets/questions/14-vietnam-music-concert.jpg",
         "imageAlt": "Âm nhạc Việt Nam"
       },
       {
@@ -498,7 +498,7 @@
           "Nhiệt độ luôn cao trên 30°C"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=M%C3%B9a%20%C4%91%C3%B4ng%20mi%E1%BB%81n%20B%E1%BA%AFc",
+        "image": "/assets/questions/15-north-vietnam-winter.jpg",
         "imageAlt": "Mùa đông miền Bắc"
       },
       {
@@ -510,7 +510,7 @@
           "Rằm tháng 8"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=T%E1%BA%BFt%20%C4%90oan%20Ng%E1%BB%8D",
+        "image": "/assets/questions/16-doan-ngo-festival-vietnam.jpg",
         "imageAlt": "Tết Đoan Ngọ"
       },
       {
@@ -522,7 +522,7 @@
           "Văn hóa Sa Huỳnh"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Th%C3%A1nh%20%C4%91%E1%BB%8Ba%20M%E1%BB%B9%20S%C6%A1n",
+        "image": "/assets/questions/17-my-son-sanctuary.jpg",
         "imageAlt": "Thánh địa Mỹ Sơn"
       },
       {
@@ -534,7 +534,7 @@
           "Cây đay"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=C%C3%A0%20ph%C3%AA%20T%C3%A2y%20Nguy%C3%AAn",
+        "image": "/assets/questions/18-coffee-central-highlands-vietnam.jpg",
         "imageAlt": "Cà phê Tây Nguyên"
       },
       {
@@ -546,7 +546,7 @@
           "Sari"
         ],
         "correct": 2,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=%C3%81o%20d%C3%A0i%20Vi%E1%BB%87t%20Nam",
+        "image": "/assets/questions/19-vietnamese-ao-dai.jpg",
         "imageAlt": "Áo dài Việt Nam"
       },
       {
@@ -558,7 +558,7 @@
           "Thanh Hóa"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=V%E1%BB%8Bnh%20H%E1%BA%A1%20Long",
+        "image": "/assets/questions/20-ha-long-bay.jpg",
         "imageAlt": "Vịnh Hạ Long"
       },
       {
@@ -570,7 +570,7 @@
           "Tháng 2–4"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Nam%20B%E1%BB%99%20m%C3%B9a%20m%C6%B0a",
+        "image": "/assets/questions/21-mekong-delta-rainy-season.jpg",
         "imageAlt": "Nam Bộ mùa mưa"
       },
       {
@@ -582,7 +582,7 @@
           "Quảng Ngãi"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Ph%E1%BB%91%20c%E1%BB%95%20H%E1%BB%99i%20An",
+        "image": "/assets/questions/22-hoi-an-lanterns.jpg",
         "imageAlt": "Phố cổ Hội An"
       },
       {
@@ -594,7 +594,7 @@
           "Quang Trung"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=L%E1%BB%85%20h%E1%BB%99i%20%C4%90%E1%BB%81n%20H%C3%B9ng",
+        "image": "/assets/questions/23-hung-kings-festival.jpg",
         "imageAlt": "Lễ hội Đền Hùng"
       },
       {
@@ -606,7 +606,7 @@
           "Bột năng"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=B%C3%A1nh%20x%C3%A8o",
+        "image": "/assets/questions/24-banh-xeo-vietnam.jpg",
         "imageAlt": "Bánh xèo"
       },
       {
@@ -618,7 +618,7 @@
           "Cận cực"
         ],
         "correct": 2,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=C%E1%BA%A3nh%20quan%20nhi%E1%BB%87t%20%C4%91%E1%BB%9Bi%20Vi%E1%BB%87t%20Nam",
+        "image": "/assets/questions/25-vietnam-tropical-landscape.jpg",
         "imageAlt": "Cảnh quan nhiệt đới Việt Nam"
       },
       {
@@ -630,7 +630,7 @@
           "Nhà Lê"
         ],
         "correct": 2,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=C%E1%BB%91%20%C4%91%C3%B4%20Hu%E1%BA%BF",
+        "image": "/assets/questions/26-hue-imperial-city.jpg",
         "imageAlt": "Cố đô Huế"
       },
       {
@@ -642,7 +642,7 @@
           "Khánh Hòa"
         ],
         "correct": 1,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=N%C6%B0%E1%BB%9Bc%20m%E1%BA%AFm%20Ph%C3%BA%20Qu%E1%BB%91c",
+        "image": "/assets/questions/27-phu-quoc-fish-sauce.jpg",
         "imageAlt": "Nước mắm Phú Quốc"
       },
       {
@@ -654,7 +654,7 @@
           "Lai Châu"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Ru%E1%BB%99ng%20b%E1%BA%ADc%20thang%20Sa%20Pa",
+        "image": "/assets/questions/28-sapa-rice-terraces.jpg",
         "imageAlt": "Ruộng bậc thang Sa Pa"
       },
       {
@@ -666,7 +666,7 @@
           "Đà Lạt"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=B%C3%BAn%20ch%E1%BA%A3%20H%C3%A0%20N%E1%BB%99i",
+        "image": "/assets/questions/29-bun-cha-hanoi.jpg",
         "imageAlt": "Bún chả Hà Nội"
       },
       {
@@ -678,7 +678,7 @@
           "Đi du lịch đầu năm"
         ],
         "correct": 0,
-        "image": "https://placehold.co/800x450/365f49/ffffff?text=Ho%E1%BA%A1t%20%C4%91%E1%BB%99ng%20tri%20%C3%A2n%20v%C3%A0%20t%C6%B0%E1%BB%9Fng%20ni%E1%BB%87m",
+        "image": "/assets/questions/30-vietnam-war-memorial-flowers.jpg",
         "imageAlt": "Hoạt động tri ân và tưởng niệm"
       }
     ]
